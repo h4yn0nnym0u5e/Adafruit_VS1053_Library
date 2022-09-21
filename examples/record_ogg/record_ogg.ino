@@ -69,7 +69,7 @@ void setup() {
   digitalWrite(REC_BUTTON, HIGH);
   
   // load plugin from SD card! We'll use mono 44.1KHz, high quality
-  if (! musicPlayer.prepareRecordOgg("v44k1q05.img")) {
+  if (! musicPlayer.prepareRecordOgg((const char*) "v44k1q05.img")) {
      Serial.println("Couldn't load plugin!");
      while (1);    
   }
@@ -149,7 +149,7 @@ uint16_t saveRecordedData(boolean isrecord) {
     Serial.print(wordswaiting); Serial.println(" remaining");
     // wrapping up the recording!
     uint16_t addr = 0;
-    for (int x=0; x < wordswaiting-1; x++) {
+    for (uint16_t x=0; x < wordswaiting-1; x++) {
       // fill the buffer!
       uint16_t t = musicPlayer.recordedReadWord();
       recording_buffer[addr] = t >> 8; 

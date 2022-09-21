@@ -328,7 +328,7 @@ void Adafruit_VS1053::applyPatch(const uint16_t *patch, uint16_t patchsize) {
 }
 
 
-uint16_t Adafruit_VS1053::loadPlugin(char *plugname) {
+uint16_t Adafruit_VS1053::loadPlugin(const char *plugname) {
 
   File plugin = SD.open(plugname);
   if (!plugin) {
@@ -493,7 +493,7 @@ uint16_t Adafruit_VS1053::recordedReadWord(void) {
 }
 
 
-boolean Adafruit_VS1053::prepareRecordOgg(char *plugname) {
+boolean Adafruit_VS1053::prepareRecordOgg(const char *plugname) {
   sciWrite(VS1053_REG_CLOCKF, 0xC000);  // set max clock
   delay(1);    while (! readyForData() );
 
@@ -507,7 +507,7 @@ boolean Adafruit_VS1053::prepareRecordOgg(char *plugname) {
   sciWrite(VS1053_REG_WRAMADDR, VS1053_INT_ENABLE);
   sciWrite(VS1053_REG_WRAM, 0x02);
 
-  int pluginStartAddr = loadPlugin(plugname);
+  uint16_t pluginStartAddr = loadPlugin(plugname);
   if (pluginStartAddr == 0xFFFF) return false;
   Serial.print("Plugin at $"); Serial.println(pluginStartAddr, HEX);
   if (pluginStartAddr != 0x34) return false;

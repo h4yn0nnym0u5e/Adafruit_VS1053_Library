@@ -93,7 +93,7 @@ class Adafruit_VS1053 {
   void playData(uint8_t *buffer, uint8_t buffsiz);
   boolean readyForData(void);
   void applyPatch(const uint16_t *patch, uint16_t patchsize);
-  uint16_t loadPlugin(char *fn);
+  uint16_t loadPlugin(const char *fn);
 
   void GPIO_digitalWrite(uint8_t i, uint8_t val);
   void GPIO_digitalWrite(uint8_t i);
@@ -101,7 +101,7 @@ class Adafruit_VS1053 {
   boolean GPIO_digitalRead(uint8_t i);
   void GPIO_pinMode(uint8_t i, uint8_t dir);
  
-  boolean prepareRecordOgg(char *plugin);
+  boolean prepareRecordOgg(const char *plugin);
   void startRecordOgg(boolean mic);
   void stopRecordOgg(void);
   uint16_t recordedWordsWaiting(void);
